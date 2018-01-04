@@ -1,57 +1,68 @@
-#Vim Command Parser 
+# vim-command-parser [![Build Status](https://travis-ci.org/elzup/vim-command-parser.svg?branch=master)](https://travis-ci.org/elzup/vim-command-parser)
 
-Vim's commands are powerful. This library is meant to parse those that fit a general syntax of:
+> parse vim key sequence.
 
-	[count][operator][count][motion]
 
-As defined in [vim docs](http://vimdoc.sourceforge.net/htmldoc/intro.html#notation)
+## Install
 
-##Usage
-
-var Parser = require('vim-command-parser'),
-	parser = new Parser();
-
-##Format
-
-Input: command string
-
-```javascript
-parser.parse('c3fa')
 ```
-
-Output: object
-
-```javascript
-{
-	description: '{operator}{count}{motion}',
-	value: ['c', 3, 'fa']
-}
-```
-
-Why is this useful? Imagine implementing the actual commands like so:
-
-```javascript
-//Define command handlers
-var commands = {
-	'{count}{motion}': function(count, motion) {
-		while(ct--) this.exec(motion);
-	}
-};
-```
-
-```javascript
-//Use the parser to map keystrokes to handlers
-var keyBuffer = '';
-vim.on('key', function(key) {
-	keyBuffer += key;
-	var command = parser.parse(keyBuffer);
-	if(command.description in commands) commands[command.description].apply(vim,command.value
-});
+$ npm install vim-command-parser
 ```
 
 
-##TODO:
+## Usage
 
-- Registers
+```js
+const vimCommandParser = require('vim-command-parser');
+
+vimCommandParser('unicorns');
+//=> 'unicorns & rainbows'
+```
 
 
+## API
+
+### vimCommandParser(input, [options])
+
+#### input
+
+Type: `string`
+
+Lorem ipsum.
+
+#### options
+
+##### foo
+
+Type: `boolean`<br>
+Default: `false`
+
+Lorem ipsum.
+
+
+## CLI
+
+```
+$ npm install --global vim-command-parser
+```
+
+```
+$ vim-command-parser --help
+
+  Usage
+    vim-command-parser [input]
+
+  Options
+    --foo  Lorem ipsum [Default: false]
+
+  Examples
+    $ vim-command-parser
+    unicorns & rainbows
+    $ vim-command-parser ponies
+    ponies & rainbows
+```
+
+
+## License
+
+MIT © [elzup](http://elzup.com)
